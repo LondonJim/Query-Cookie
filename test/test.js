@@ -12,15 +12,21 @@ describe('loading express', function () {
     server.close();
   });
 
-  it('responds to /', function testSlash(done) {
-  request(server)
-    .get('/')
-    .expect(200, done);
+  it('responds to /', function testRoot(done) {
+    request(server)
+      .get('/')
+      .expect(200, done);
   });
 
-  it('404 everything else', function testPath(done) {
+  it('responds to /', function testSet(done) {
     request(server)
-      .get('/foo/bar')
+      .get('/set')
+      .expect(200, done);
+  });
+
+  it('404 everything else', function testErrorPath(done) {
+    request(server)
+      .get('/nothingToSeeHere')
       .expect(404, done);
   });
 
