@@ -18,10 +18,16 @@ describe('loading express', function () {
       .expect(200, done);
   });
 
-  it('responds to /', function testSet(done) {
+  it('responds to /set', function testSet(done) {
     request(server)
       .get('/set')
       .expect(200, done);
+  });
+
+  it('responds to /set?something=somevalue', function testSet(done) {
+    request(server)
+      .get('/set?something=somevalue')
+      .expect('somevalue', done);
   });
 
   it('404 everything else', function testErrorPath(done) {
