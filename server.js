@@ -1,14 +1,16 @@
 var express = require("express");
-
 var app = express();
 
-app.get('/', function(req, res) {
-  res.status(200).send('root');
-});
+var data
 
 app.get('/set', function(req, res) {
-  res.send(req.query.something);
+  data = req.query
+  res.end()
 });
+
+app.get('/get', function(req, res) {
+  res.send(data[req.query.key])
+})
 
 var server = app.listen(4000, function() {
   console.log("please navigate to http://localhost:4000 in your client")

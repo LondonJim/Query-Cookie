@@ -12,22 +12,36 @@ describe('loading express', function () {
     server.close();
   });
 
-  it('responds to /', function testRoot(done) {
-    request(server)
-      .get('/')
-      .expect(200, done);
-  });
-
   it('responds to /set', function testSet(done) {
     request(server)
       .get('/set')
       .expect(200, done);
   });
 
-  it('responds to /set?something=somevalue', function testSet(done) {
+  it('responds to /get', function testGet(done) {
     request(server)
-      .get('/set?something=somevalue')
-      .expect('somevalue', done);
+      .get('/get')
+      .expect(200, done);
+  });
+
+  it('responds to /set?data=bigData', function testSetData(done) {
+    request(server)
+      .get('/set?somekey=somevalue')
+      .expect(function (res) {
+        res.headers['somekey'] = '';
+      })
+      .expect('somekey', '')
+      .end(done);
+  });
+
+  it('responds to /get?key=data', function testGetData(done) {
+    request(server)
+      .get('/set?data=bigData')
+      .then(function() {
+        request(server)
+        .get('/get?key=data')
+        .expect('bigData', done);
+      });
   });
 
   it('404 everything else', function testErrorPath(done) {
