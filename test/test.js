@@ -1,4 +1,5 @@
 var request = require('supertest');
+var async = require('async');
 
 describe('loading express', function () {
 
@@ -34,15 +35,13 @@ describe('loading express', function () {
       .end(done);
   });
 
-  // it('responds to /get?key=data', function testGetData(done) {
-  //   request(server)
-  //     .get('/set?data=bigData')
-  //     .then(function() {
-  //       request(server)
-  //       .get('/get?key=data')
-  //       .expect('bigData', done);
-  //     });
-  // });
+  it('responds to /get?key=data', function testGetData(done) {
+    async.series([
+      function() { request.agent(server).get('/set?data=bigData') },
+      function() { request.agent(server).get('/get?key=data')
+        .expect('bigData')}
+    ], done());
+  });
 
   it('404 everything else', function testErrorPath(done) {
     request(server)

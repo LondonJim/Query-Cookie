@@ -14,7 +14,7 @@ app.get('/get', function(req, res) {
   if (req.session.data != null) {
     res.send(req.session.data[req.query.key])
   }
-  res.send()
+  res.end()
 })
 
 var server = app.listen(4000, function() {
