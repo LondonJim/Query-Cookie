@@ -1,15 +1,20 @@
 var express = require("express");
+var session = require('express-session')
 var app = express();
-
-var data
+app.use(session({secret: "secret",
+                 resave: false,
+                 saveUninitialized: false}));
 
 app.get('/set', function(req, res) {
-  data = req.query
+  req.session.data = req.query
   res.end()
 });
 
 app.get('/get', function(req, res) {
-  res.send(data[req.query.key])
+  if (req.session.data != null) {
+    res.send(req.session.data[req.query.key])
+  }
+  res.send()
 })
 
 var server = app.listen(4000, function() {

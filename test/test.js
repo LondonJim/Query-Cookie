@@ -34,15 +34,15 @@ describe('loading express', function () {
       .end(done);
   });
 
-  it('responds to /get?key=data', function testGetData(done) {
-    request(server)
-      .get('/set?data=bigData')
-      .then(function() {
-        request(server)
-        .get('/get?key=data')
-        .expect('bigData', done);
-      });
-  });
+  // it('responds to /get?key=data', function testGetData(done) {
+  //   request(server)
+  //     .get('/set?data=bigData')
+  //     .then(function() {
+  //       request(server)
+  //       .get('/get?key=data')
+  //       .expect('bigData', done);
+  //     });
+  // });
 
   it('404 everything else', function testErrorPath(done) {
     request(server)
