@@ -35,7 +35,8 @@ describe('loading express', function () {
   it('responds to /get?key=data', function testGetData(done) {
     var agent = request(server)
       agent.get('/set').query({ data: 'bigData' }).end(function() {
-        agent.get('/get').query({ key: "data"}).end(done);
+        agent.get('/get').query({ key: "data"})
+          .expect(200, done);
       })
   });
 
