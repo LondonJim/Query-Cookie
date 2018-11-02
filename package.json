@@ -5,12 +5,14 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "start": "node server.js"
+    "start": "node server.js",
+    "cypress:open": "cypress open"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^2.6.1",
+    "cypress": "^3.1.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6"
   },

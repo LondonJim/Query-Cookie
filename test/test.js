@@ -27,20 +27,16 @@ describe('loading express', function () {
 
   it('responds to /set?data=bigData', function testSetData(done) {
     request(server)
-      .get('/set?somekey=somevalue')
-      .expect(function (res) {
-        res.headers['somekey'] = '';
-      })
-      .expect('somekey', '')
-      .end(done);
+      .get('/set')
+      .query({ data: 'bigData' })
+      .expect(200, done);
   });
 
   it('responds to /get?key=data', function testGetData(done) {
-    async.series([
-      function() { request.agent(server).get('/set?data=bigData') },
-      function() { request.agent(server).get('/get?key=data')
-        .expect('bigData')}
-    ], done());
+    var agent = request(server)
+      agent.get('/set').query({ data: 'bigData' }).end(function() {
+        agent.get('/get').query({ key: "data"}).end(done);
+      })
   });
 
   it('404 everything else', function testErrorPath(done) {
