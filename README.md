@@ -1,13 +1,13 @@
-# Database Server Tech Test
+# Query save as cookie
 
-## The brief
-
-Write a program that runs a server that is accessible on `http://localhost:4000/`. When your server receives a request on `http://localhost:4000/set?somekey=somevalue` it should store the passed key and value in memory. When it receives a request on `http://localhost:4000/get?key=somekey` it should return the value stored at `somekey`. Store the data in memory, not in a database, but bear in mind that you will later need to add a database to this code."
+Setting a query saves the key value as a cookie (eg. localhost:4000?exampleKey=exampleValue). The infomation in the cookie is returned in JSON format in the body of the root (eg. visiting localhost:4000/ will display the information: {"exampleKey"="exampleValue"})
 
 ## Install
 
-`git clone git@github.com:LondonJim/Database-Server-Tech-Test.git`
-`cd Database-Server-Tech-Test`
+Written with Express
+
+`git clone git@github.com:LondonJim/Query-Cookie.git`
+`cd query-cookie`
 `npm install`
 
 ## Run
@@ -20,17 +20,21 @@ In the url enter:
 
 Where exampleKey is any key you wish and exampleValue is any value you wish
 
-Currently this hold the query in a session
+It then sets this information as a cookie (cookieName)
 
 Then enter:
 
-`localhost:4000/get/?key=exampleKey`
+`localhost:4000/`
 
-It will then return the value of the key you set above
+It will then return the information back as a JSON
+
+eg. {"exampleKey":"exampleValue"}
 
 ## Testing
 
-#### Mocha/Supertest
+#### Mocha
+
+Basic server tests
 
 `npm test`
 

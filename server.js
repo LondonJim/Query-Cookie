@@ -1,20 +1,18 @@
-var express = require("express");
-var session = require('express-session')
-var app = express();
-app.use(session({secret: "secret",
-                 resave: false,
-                 saveUninitialized: false}));
+var cookieParser = require("cookie-parser")
+var express = require("express")
+var app = express()
+
+app.use(cookieParser())
 
 app.get('/set', function(req, res) {
-  req.session.data = req.query
-  res.end()
-});
+  res.cookie('cookieName',req.query , { maxAge: 900000, httpOnly: true })
+    .end()
+})
 
-app.get('/get', function(req, res) {
-  if (req.session.data != null) {
-    res.send(req.session.data[req.query.key])
-  }
-  res.end()
+app.get('/', function(req, res) {
+  var cookie = req.cookies.cookieName
+  res.send(JSON.stringify(cookie))
+    .end()
 })
 
 var server = app.listen(4000, function() {

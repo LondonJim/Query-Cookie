@@ -13,15 +13,9 @@ describe('loading express', function () {
     server.close();
   });
 
-  it('responds to /set', function testSet(done) {
+  it('responds to /', function testGet(done) {
     request(server)
-      .get('/set')
-      .expect(200, done);
-  });
-
-  it('responds to /get', function testGet(done) {
-    request(server)
-      .get('/get')
+      .get('/')
       .expect(200, done);
   });
 
@@ -30,14 +24,6 @@ describe('loading express', function () {
       .get('/set')
       .query({ data: 'bigData' })
       .expect(200, done);
-  });
-
-  it('responds to /get?key=data', function testGetData(done) {
-    var agent = request(server)
-      agent.get('/set').query({ data: 'bigData' }).end(function() {
-        agent.get('/get').query({ key: "data"})
-          .expect(200, done);
-      })
   });
 
   it('404 everything else', function testErrorPath(done) {
