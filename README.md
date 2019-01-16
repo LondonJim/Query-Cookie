@@ -1,13 +1,17 @@
-# Query save as cookie
+# Save and Return Query Cookie
 
-Setting a query saves the key value as a cookie (eg. localhost:4000?exampleKey=exampleValue). The infomation in the cookie is returned in JSON format in the body of the root (eg. visiting localhost:4000/ will display the information: {"exampleKey"="exampleValue"})
+Setting a query saves the keys and values as a cookie (eg. localhost:4000?exampleKey=exampleValue). The information in the cookie is returned in JSON format in the body of the root (eg. visiting localhost:4000/ will display the information: {"exampleKey"="exampleValue"})
+
+Converted and changed from my existing repo ([Database-Server-Tech-Test](https://github.com/LondonJim/Database-Server-Tech-Test)) that set queries as sessions and returns queries based on a a key.
 
 ## Install
 
 Written with Express
 
 `git clone git@github.com:LondonJim/Query-Cookie.git`
+
 `cd query-cookie`
+
 `npm install`
 
 ## Run
@@ -34,7 +38,7 @@ eg. {"exampleKey":"exampleValue"}
 
 #### Mocha
 
-Basic server tests
+Basic server
 
 `npm test`
 
